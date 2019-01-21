@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<relativeLayout
-
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    android:
+<TextView
+android:layout_weight="1"
+android:layout_width ="match_parent"
+android:layout_height ="wrap_content"
+android:Layout_gravity="fill"
+    ></TextView>
+
+</RelativeLayout>
