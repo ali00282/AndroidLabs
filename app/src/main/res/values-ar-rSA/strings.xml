@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name"> لوڈ، اتارنا لیب </string>
+    <string name="hello_message"> خوش آمدید </string>
+    <string name="ButtonText">میں ایک بٹن ہوں </string>
+    <string name="widgets">یہاں میری ویجٹ ہیں:</string>
+    <string name="btn1">بٹن</string>
+    <string name="checkBox">اس کو دیکھو!</string>
+    <string name="switch1">سوئچ / بند</string>
+    <string name="hint" >یہاں جواب دیں</string>
+
+</resources>
