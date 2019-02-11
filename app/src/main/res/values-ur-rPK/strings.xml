@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name"> لوڈ، اتارنا لیب </string>
+    <string name="hello_message"> خوش آمدید </string>
+    <string name="ButtonText">میں ایک بٹن ہوں </string>
+    <string name="widgets">یہاں میری ویجٹ ہیں:</string>
+    <string name="btn1">بٹن</string>
+    <string name="checkBox">اس کو دیکھو!</string>
+    <string name="switch1">سوئچ / بند</string>
+    <string name="hint" >یہاں جواب دیں</string>
+
+
+    <!--<string name="app_name">AndroidLabs</string>-->
+    <!--<string name="hello_message">I  am a button</string>-->
+    <!--<string name="ButtonText">ہیلو </string>-->
+    <!--<string name="widgets">Here are my widgets:</string>-->
+    <!--<string name="btn1">Button</string>-->
+    <!--<string name="checkBox">Check this out!</string>-->
+    <!--<string name="switch1">Switch on / off</string>-->
+    <!--<string name="hint" >Type your answer here</string>-->
+
+
+    </resources>
+
