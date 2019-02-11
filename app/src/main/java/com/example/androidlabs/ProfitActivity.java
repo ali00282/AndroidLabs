@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -15,6 +16,7 @@ import com.example.androidlab.R;
 public class ProfitActivity extends AppCompatActivity {
 
    ImageButton mImageButton;
+   Button chatButton;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
@@ -43,6 +45,19 @@ public class ProfitActivity extends AppCompatActivity {
             }
         });
         Log.e(ACTIVITY_NAME,"in function: onCreate()");
+
+
+        // Lab4 ChatButton onClickListener
+
+        chatButton = (Button)findViewById(R.id.chatButton);
+
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent itLab4 = new Intent(ProfitActivity.this, ChatRoomActivity.class);
+            }
+        });
     }
 
        // This will start Android’s Activity that is responsible for the MediaStore.ACTION_IMAGE_CAPTURE intent. Since you are using startActivityForResult( ), the activity will call your onActivityResult(int request, int result, Intent data ) when finished. If you clicked the checkbox button on the camera activity, then result will be Activity.RESULT_OK, and the data parameter will be an intent that has the picture saved under the name “data”:

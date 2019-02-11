@@ -24,9 +24,11 @@
     <string name="profileTextView">Your Picture</string>
     <string name="pictureText">click the button above to take a picture</string>
 
-
-
-
+    //Lab4 Strings
+    <string name="chatButtonText">Go to Chat</string>
+    <string name="lstViewBtnTextSend">SEND</string>
+    <string name="lstTextViewHint">Type Here</string>
+    <string name="lstViewBtnTextReceive">RECEIVE</string>
 
 
 </resources>
