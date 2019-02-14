@@ -56,6 +56,7 @@ public class ProfitActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent itLab4 = new Intent(ProfitActivity.this, ChatRoomActivity.class);
+                startActivityForResult(itLab4, 345);
             }
         });
     }
