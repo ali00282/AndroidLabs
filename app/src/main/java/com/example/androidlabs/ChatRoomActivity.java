@@ -1,6 +1,8 @@
 package com.example.androidlabs;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,31 +28,41 @@ public class ChatRoomActivity extends AppCompatActivity {
     Button btnSend;
     Button btnReceive;
 
+    // DATABASE CLASS REFERENCE OBJECT
+    DatabaseClass dc = new DatabaseClass(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lv = (ListView)findViewById(R.id.lstView);
         et = (EditText)findViewById(R.id.chatEditText);
         btnSend = (Button)findViewById(R.id.SendBtn);
         btnReceive = (Button)findViewById(R.id.ReceiveBtn);
 
+
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String sendMessage = et.getText().toString();
-                if ( !sendMessage.equals("")){
-                    Message model = new Message(sendMessage, true);
-                    msgList.add(model);
 
-                    ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
-                    lv.setAdapter(adt);
-                    et.setText("");
+                    String sendMessage = et.getText().toString();
+                    if (!sendMessage.equals("")) {
+                        Message model = new Message(sendMessage,true, true);
+                        dc.insertMessage(sendMessage);
+                        msgList.add(model);
+                        ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
+                        lv.setAdapter(adt);
+                        et.setText("");
+
+                    }
+
                 }
-            }
+
         });
 
         btnReceive.setOnClickListener(new View.OnClickListener() {
@@ -59,16 +71,22 @@ public class ChatRoomActivity extends AppCompatActivity {
 
                 String sendMessage = et.getText().toString();
                 if ( !sendMessage.equals("")){
-                    Message model = new Message(sendMessage, false);
+                    Message model = new Message(sendMessage,true,false);
                     msgList.add(model);
 
                     ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
                     lv.setAdapter(adt);
                     et.setText("");
+                    dc.insertMessage(sendMessage);
                 }
             }
         });
 
+
+    }
+
+
+    public void printCursor(Cursor c) {
 
     }
 }
@@ -105,7 +123,7 @@ class ChatAdapter extends BaseAdapter{
         View view = convertView;
 
         if (view == null){
-            if (messageModels.get(position).isSend()){
+            if (messageModels.get(position).getisReceived()){
                 view = inflater.inflate(R.layout.activity_send, null);
 
             }else {
