@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
+    private static final String TAG = ChatRoomActivity.class.getSimpleName();
     ListView lv;
     EditText et;
     List<Message> msgList = new ArrayList<>();
@@ -43,6 +45,9 @@ public class ChatRoomActivity extends AppCompatActivity {
         btnSend = (Button)findViewById(R.id.SendBtn);
         btnReceive = (Button)findViewById(R.id.ReceiveBtn);
 
+        dc.viewData();
+        dc.printCursor();
+
 
 
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -50,10 +55,10 @@ public class ChatRoomActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                    String sendMessage = et.getText().toString();
-                    if (!sendMessage.equals("")) {
-                        Message model = new Message(sendMessage,true, true);
-                        dc.insertMessage(sendMessage);
+                    String msg = et.getText().toString();
+                    if (!msg.equals("")) {
+                        Message model = new Message(msg,true, false);
+                        dc.insertSendMessage(msg);
                         msgList.add(model);
                         ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
                         lv.setAdapter(adt);
@@ -69,26 +74,30 @@ public class ChatRoomActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String sendMessage = et.getText().toString();
-                if ( !sendMessage.equals("")){
-                    Message model = new Message(sendMessage,true,false);
+                String msg = et.getText().toString();
+                if ( !msg.equals("")){
+                    Message model = new Message(msg,false,true);
+                    dc.insertReceiveMessage(msg);
                     msgList.add(model);
 
                     ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
                     lv.setAdapter(adt);
                     et.setText("");
-                    dc.insertMessage(sendMessage);
+
+
                 }
+
+
             }
         });
 
 
+
+
     }
 
 
-    public void printCursor(Cursor c) {
 
-    }
 }
 
 class ChatAdapter extends BaseAdapter{
@@ -123,7 +132,7 @@ class ChatAdapter extends BaseAdapter{
         View view = convertView;
 
         if (view == null){
-            if (messageModels.get(position).getisReceived()){
+            if (messageModels.get(position).getisSent()){
                 view = inflater.inflate(R.layout.activity_send, null);
 
             }else {

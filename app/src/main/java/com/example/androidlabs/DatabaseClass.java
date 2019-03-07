@@ -17,7 +17,7 @@ public class DatabaseClass extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "lab5Database";
 
     //DATABASE VERSION
-    private static final int DATABAS_VERSION = 1;
+    private static final int DATABAS_VERSION = 2;
 
     // DATABASE TABLE
     // NOTE: WE CAN HAVE MULTIPLE TABLES,BUT FOR NOW, WE JUST NEED ONE TABLE TO STORE DATA
@@ -59,23 +59,74 @@ public class DatabaseClass extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insertMessage(String sendMessage) {
+    public long insertSendMessage(String msg) {
 
         // This method allow us permission to store data into database
         SQLd = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(SEDN_MSG, sendMessage);
+        cv.put(SEDN_MSG, msg);
+       cv.put(RECEIVE_MSG, "null");
         return SQLd.insert(TABLE_NAME,null, cv);
+
+
+    }
+
+
+
+    public long insertReceiveMessage(String msg) {
+
+        // This method allow us permission to store data into database
+        SQLd = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(SEDN_MSG, "null");
+        cv.put(RECEIVE_MSG,msg);
+        return SQLd.insert(TABLE_NAME,null, cv);
+
 
     }
 
     // THIS METHOD IS INCOMPLETE //
-    public void printCursor(Cursor c){
+    public Cursor printCursor(){
 
         SQLd = this.getReadableDatabase();
 
-        c = SQLd.rawQuery("select * from " + TABLE_NAME,null);
-        Log.d("Cursor Object", DatabaseUtils.dumpCursorToString(c));
+        String[] columns = new String[]{ROW_ID,SEDN_MSG,RECEIVE_MSG};
+        Cursor c = SQLd.query(TABLE_NAME,columns,null,null,null,null,null);
+//        c = SQLd.rawQuery("select * from " + TABLE_NAME,null);
+
+        int row = c.getColumnIndex(ROW_ID);
+        int sendMsg = c.getColumnIndex(SEDN_MSG);
+        int receiveMsg = c.getColumnIndex(RECEIVE_MSG);
+
+        String result ="";
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+
+            result =  result  +  c.getString(row) +" " + c.getString(sendMsg) + " " + c.getString(receiveMsg) + "\n";
+
+        }
+
+        Log.v("DatabaseClass",result);
+
+        return c;
 
     }
+
+
+    // HELP EXAMPLE //
+    public Cursor viewData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Query to view the whole table data!!!
+        String query = "Select * from "+TABLE_NAME;
+
+        // Query to view table columns!!!
+//        String query1 = "Select * from sqlite_master";
+
+        Cursor cursor = db.rawQuery(query, null);
+//        Cursor cursor1 = db.rawQuery(query, null);
+        Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(cursor));
+        return cursor;
+    }
+
+
 }
