@@ -45,9 +45,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         btnSend = (Button)findViewById(R.id.SendBtn);
         btnReceive = (Button)findViewById(R.id.ReceiveBtn);
 
-        dc.viewData();
-        dc.printCursor();
-
+//        viewFullData();
 
 
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +55,15 @@ public class ChatRoomActivity extends AppCompatActivity {
 
                     String msg = et.getText().toString();
                     if (!msg.equals("")) {
-                        Message model = new Message(msg,true, false);
-                        dc.insertSendMessage(msg);
-                        msgList.add(model);
-                        ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
-                        lv.setAdapter(adt);
+//                        Message model = new Message(msg,true, false);
+                        dc.insertMessage(msg,true);
+//                        msgList.add(model);
+//                        ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
+//                        lv.setAdapter(adt);
                         et.setText("");
+                        msgList.clear();
+                        viewFullData();
+
 
                     }
 
@@ -76,24 +77,42 @@ public class ChatRoomActivity extends AppCompatActivity {
 
                 String msg = et.getText().toString();
                 if ( !msg.equals("")){
-                    Message model = new Message(msg,false,true);
-                    dc.insertReceiveMessage(msg);
-                    msgList.add(model);
+//                    Message model = new Message(msg,false,true);
+                    dc.insertMessage(msg,true);
+//                    msgList.add(model);
 
-                    ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
-                    lv.setAdapter(adt);
+//                    ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
+//                    lv.setAdapter(adt);
                     et.setText("");
+                    msgList.clear();
+                    viewFullData();
 
 
                 }
 
+                Log.d("ChatRoomActivity","onCreate");
 
             }
         });
 
+        viewFullData();
+
+    }
 
 
+    private void viewFullData(){
+        Cursor cursor = dc.printCursor();
 
+        if (cursor.getCount() != 0){
+            while (cursor.moveToNext()){
+
+                Message model = new Message(cursor.getString(1), cursor.getInt(2)==0);
+                msgList.add(model);
+                ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
+                lv.setAdapter(adt);
+
+           }
+        }
     }
 
 
@@ -132,7 +151,7 @@ class ChatAdapter extends BaseAdapter{
         View view = convertView;
 
         if (view == null){
-            if (messageModels.get(position).getisSent()){
+            if (messageModels.get(position).isSend()){
                 view = inflater.inflate(R.layout.activity_send, null);
 
             }else {
