@@ -78,7 +78,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 String msg = et.getText().toString();
                 if ( !msg.equals("")){
 //                    Message model = new Message(msg,false,true);
-                    dc.insertMessage(msg,true);
+                    dc.insertMessage(msg,false);
 //                    msgList.add(model);
 
 //                    ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
