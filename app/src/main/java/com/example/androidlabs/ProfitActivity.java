@@ -18,6 +18,9 @@ public class ProfitActivity extends AppCompatActivity {
    ImageButton mImageButton;
    Button chatButton;
 
+   // Toolbar Activity Button
+    Button toolBarBtn;
+
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     @Override
@@ -28,6 +31,25 @@ public class ProfitActivity extends AppCompatActivity {
         Intent login = getIntent();
 
         mImageButton = (ImageButton) findViewById(R.id.profileImageButton);
+
+        toolBarBtn = (Button) findViewById(R.id.toolBarBtn);
+
+
+
+        toolBarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toolbar = new Intent(ProfitActivity.this,TestToolbar.class);
+
+                startActivity(toolbar);
+            }
+        });
+
+
+
+
+
 
 
         String emailTyped = login.getStringExtra("emailTyped");

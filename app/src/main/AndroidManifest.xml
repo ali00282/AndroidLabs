@@ -13,10 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.example.androidlabs.ChatRoomActivity"
-            android:parentActivityName="com.example.androidlabs.ProfitActivity"></activity>
-
+        <activity android:name="com.example.androidlabs.TestToolbar"></activity>
+        <activity
+            android:name="com.example.androidlabs.ChatRoomActivity"
+            android:parentActivityName="com.example.androidlabs.ProfitActivity" />
         <activity android:name="com.example.androidlabs.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

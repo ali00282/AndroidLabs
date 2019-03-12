@@ -67,6 +67,8 @@ public class ChatRoomActivity extends AppCompatActivity {
 
                     }
 
+
+
                 }
 
         });
@@ -78,7 +80,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 String msg = et.getText().toString();
                 if ( !msg.equals("")){
 //                    Message model = new Message(msg,false,true);
-                    dc.insertMessage(msg,true);
+                    dc.insertMessage(msg,false);
 //                    msgList.add(model);
 
 //                    ChatAdapter adt = new ChatAdapter(msgList, getApplicationContext());
@@ -152,9 +154,12 @@ class ChatAdapter extends BaseAdapter{
 
         if (view == null){
             if (messageModels.get(position).isSend()){
-                view = inflater.inflate(R.layout.activity_send, null);
+
+//                view = inflater.inflate(R.layout.activity_receive, null);
+              view = inflater.inflate(R.layout.activity_send, null);
 
             }else {
+//                view = inflater.inflate(R.layout.activity_send, null);
                 view = inflater.inflate(R.layout.activity_receive, null);
             }
             TextView messageText = (TextView)view.findViewById(R.id.messageText);

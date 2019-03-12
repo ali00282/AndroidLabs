@@ -31,6 +31,10 @@
     <string name="lstViewBtnTextReceive">RECEIVE</string>
 
 
+    //Lab6 String
+    <string name="toolbarBtnText">Go To Toolbar Page</string>
+
+
 </resources>
 
 

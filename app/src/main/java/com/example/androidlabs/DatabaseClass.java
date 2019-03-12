@@ -19,7 +19,7 @@ public class DatabaseClass extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "lab5Database";
 
     //DATABASE VERSION
-    private static final int DATABAS_VERSION = 3;
+    private static final int DATABAS_VERSION = 4;
 
     // DATABASE TABLE
     // NOTE: WE CAN HAVE MULTIPLE TABLES,BUT FOR NOW, WE JUST NEED ONE TABLE TO STORE DATA
